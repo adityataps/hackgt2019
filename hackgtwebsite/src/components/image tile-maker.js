@@ -1,9 +1,34 @@
-var c = document.getElementById("canvas"),
+import java from './java.png';
+import React from 'react';
+import logo from '../Hackpic.PNG';
+//<img src={java} alt="Java" />;
+
+import Logo from "./logo.png";
+//console.log(logo); // /logo.84287d09.png
+function Header() {
+	// Import result is the URL of your image
+	return <img src={logo} alt="Example of matrix with letters" />;
+}
+
+Header();
+let img;
+
+<img src={logo} alt="Example of matrix with letters" />;
+
+{/*<img src={Logo}/>*/}
+{/*let src;*/}
+{/*let alt;*/}
+{/*<img src={Logo} alt= "Logo" />*/}
+
+
+
+
+let c = document.getElementById("canvas"),
 	w = innerWidth,
 	h = innerHeight;
 c.width = w;
 c.height = h;
-var ctx = c.getContext("2d"),
+let ctx = c.getContext("2d"),
 	input = document.getElementById("input"),
 	reader = new FileReader(),
 	img = new Image(),
@@ -14,6 +39,7 @@ var ctx = c.getContext("2d"),
 	tileCountX, //how many tiles we can fit
 	tileCountY;
 
+
 //read file input
 input.onchange = function() {
 	reader.readAsDataURL(input.files[0]);
@@ -22,7 +48,7 @@ input.onchange = function() {
 		img.onload = function() {
 			//start
 			init();
-			var tiles = getTiles();
+			let tiles = getTiles();
 			drawTiles(tiles);
 		}
 	}
@@ -43,26 +69,26 @@ function init() {
 
 //get imgdata index from img px positions
 function indexX(x) {
-	var i = x * 4;
+	let i = x * 4;
 	if (i > imgData.length) console.warn("X out of bounds");
 	return i;
 }
 function indexY(y) {
-	var i = imgW * 4 * y;
+	let i = imgW * 4 * y;
 	if (i > imgData.length) console.warn("Y out of bounds");
 	return i;
 }
 function getIndex(x, y) {
-	var i = indexX(x) + indexY(y);
+	let i = indexX(x) + indexY(y);
 	if (i > imgData.length) console.warn("XY out of bounds");
 	return i;
 }
 
 //get a tile of size tileDim*tileDim from position xy
 function getTile(x, y) {
-	var tile = [];
+	let tile = [];
 	//loop over rows
-	for (var i = 0; i < tileDim; i++) {
+	for (let i = 0; i < tileDim; i++) {
 		//slice original image from x to x + tileDim, concat
 		tile.push(...imgData.slice(getIndex(x, y + i), getIndex(x + tileDim, y + i)));
 	}
@@ -76,7 +102,7 @@ function getTile(x, y) {
 
 //generate all tiles
 function getTiles() {
-	var tiles = [];
+	let tiles = [];
 	for (var yi = 0; yi < tileCountY; yi++) {
 		for (var xi = 0; xi < tileCountX; xi++) {
 			tiles.push(getTile(xi * tileDim, yi * tileDim));
@@ -86,7 +112,7 @@ function getTiles() {
 }
 
 //and draw with offset
-var offset = 1.1;
+let offset = 1.1;
 function drawTiles(tiles) {
 	tiles.forEach((d,i) => ctx.putImageData(d, d.x * offset, d.y * offset));
 	

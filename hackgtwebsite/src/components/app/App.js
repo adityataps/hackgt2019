@@ -3,6 +3,10 @@ import logo from '../../assets/images/logo.svg';
 import { createWorker } from 'tesseract.js';
 import './App.css';
 
+export let ctx;
+alert(ctx.back); //list of the sliced img
+
+
 function App() {
   return (
     <div className="App">
@@ -30,9 +34,14 @@ function runOcr() {
         await worker.load();
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
-        const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
-        console.log(text);
-        await worker.terminate();
+        for (const [img1] of ctx.entries()) {
+            const { data: { text } } = await worker.recognize(img1);
+            console.log(text);
+            await worker.terminate();
+        }
+        //const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
+        //console.log(text);
+        //await worker.terminate();
     })();
 }
 
