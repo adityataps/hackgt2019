@@ -1,7 +1,10 @@
 import java from './java.png';
 import React from 'react';
 import logo from '../Hackpic.PNG';
+
+
 //<img src={java} alt="Java" />;
+
 
 import Logo from "./logo.png";
 //console.log(logo); // /logo.84287d09.png
@@ -31,7 +34,7 @@ c.height = h;
 let ctx = c.getContext("2d"),
 	input = document.getElementById("input"),
 	reader = new FileReader(),
-	img = new Image(),
+	//img = new Image(),
 	imgW, //px
 	imgH, //px
 	imgData,
@@ -54,6 +57,8 @@ input.onchange = function() {
 	}
 }
 
+
+
 function init() {
 	imgW = img.width;
 	imgH = img.height;
@@ -67,17 +72,20 @@ function init() {
 	ctx.clearRect(0, 0, w, h);
 }
 
+
 //get imgdata index from img px positions
 function indexX(x) {
 	let i = x * 4;
 	if (i > imgData.length) console.warn("X out of bounds");
 	return i;
 }
+
 function indexY(y) {
 	let i = imgW * 4 * y;
 	if (i > imgData.length) console.warn("Y out of bounds");
 	return i;
 }
+
 function getIndex(x, y) {
 	let i = indexX(x) + indexY(y);
 	if (i > imgData.length) console.warn("XY out of bounds");
@@ -103,8 +111,8 @@ function getTile(x, y) {
 //generate all tiles
 function getTiles() {
 	let tiles = [];
-	for (var yi = 0; yi < tileCountY; yi++) {
-		for (var xi = 0; xi < tileCountX; xi++) {
+	for (let yi = 0; yi < tileCountY; yi++) {
+		for (let xi = 0; xi < tileCountX; xi++) {
 			tiles.push(getTile(xi * tileDim, yi * tileDim));
 		}
 	}
