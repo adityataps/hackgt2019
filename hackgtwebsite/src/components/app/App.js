@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import logo from '../../assets/images/logo.svg';
 import { createWorker } from 'tesseract.js';
 import './App.css';
+import axios from 'axois';
 
 
 export let ctx;
 // alert(ctx.back); //list of the sliced img
 
 
-
-// fileSelectedHandler = event => {
-//     console.log(event);
-// }
-
 class App extends Component {
+    state = {
+        selectedFile: null
+    }
     fileSelectedHandler = event => {
-        console.log(event);
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
+    fileUploadHandler = () => {
+        axios.post('')
     }
 
     render() {
@@ -35,7 +39,7 @@ class App extends Component {
                     <div className="FileUpload">
 
                         <input type="file" onChange = {this.fileSelectedHandler}/>
-
+                        <button onClick={this.fileUploadHandler}> Upload! </button>
                     </div>
 
 
