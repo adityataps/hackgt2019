@@ -25,25 +25,15 @@ function App() {
 }
 
 function runOcr() {
-    const worker = createWorker({
-        logger: m => console.log(m),
-    });
-    const doOCR = async () => {
+    const worker = createWorker();
+    (async () => {
         await worker.load();
         await worker.loadLanguage('eng');
         await worker.initialize('eng');
-        const { data: { text } } = await worker.recognize('tile.png');
-        setOcr(text);
-    };
-    const [ocr, setOcr] = useState('Recognizing...');
-    useEffect(() => {
-        doOCR();
-    });
-    return (
-        <div className="App">
-            <p>{ocr}</p>
-        </div>
-    );
+        const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
+        console.log(text);
+        await worker.terminate();
+    })();
 }
 
 export default App;
